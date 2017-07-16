@@ -1,0 +1,4 @@
+Flask-SQLAlchemy
+coverage
+numpy
+colour
