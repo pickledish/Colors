@@ -2,13 +2,14 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from flask_sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
 import os, json, csv
+from random import randint
 
-from ColorLogic import Color
+from ColorLogic import Color, Model
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -31,9 +32,17 @@ def shutdown_session(exception=None):
 
 @app.route('/')
 def home():
+
+	sessionID = request.cookies.get('session')
+	if sessionID is None: sessionID = str(randint(0, 100000))
+
 	c = Color.random().hexColor
 	d = Color.random().hexColor
-	return render_template('pages/main.html', color1 = c, color2 = d)
+
+	resp = make_response(render_template('pages/main.html', color1 = c, color2 = d))
+	resp.set_cookie('session', sessionID)
+
+	return resp
 
 @app.route('/handleResponse')
 def handler():
@@ -42,20 +51,39 @@ def handler():
 	returned2 = Color(request.args.get("color2"))
 	response = int(request.args.get("response"))
 
+	# numAnswered = int(request.args.get('numAnswered'))
+	sessionID = request.cookies.get('session')
+
 	row = returned1.getColorVector() + returned2.getColorVector() + [response]
-	backwards = row = returned2.getColorVector() + returned1.getColorVector() + [response]
+	backwards = returned2.getColorVector() + returned1.getColorVector() + [response]
 
-	with open('eggs.csv', 'a') as csvfile:
+	with open('csv/everyone.csv', 'a') as everyone:
 
-		spamwriter = csv.writer(csvfile, delimiter = ',')
-		spamwriter.writerow(row)
-		spamwriter.writerow(backwards)
+		writer = csv.writer(everyone, delimiter = ',')
+		writer.writerow(row)
+		writer.writerow(backwards)
+
+	with open('csv/' + sessionID + '.csv', 'a') as specific:
+
+		writer = csv.writer(specific, delimiter = ',')
+		writer.writerow(row)
+		writer.writerow(backwards)
 
 	c = Color.random().hexColor
 	d = Color.random().hexColor
 
-	jDict = {'color1': c, 'color2': d}
+	jDict = {'color1': c, 'color2': d, 'sessionID': sessionID}
 	return json.dumps(jDict)
+
+@app.route('/results/<sessionID>')
+def results(sessionID):
+
+	model = Model(sessionID)
+	colorPairs = model.getLikedPairs(3)
+
+	hexPairs = [[pair[0].hexColor, pair[1].hexColor] for pair in colorPairs]
+
+	return render_template('pages/results.html', pairs = hexPairs)
 
 # Error handlers.
 

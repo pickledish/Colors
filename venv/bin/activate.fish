@@ -36,7 +36,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/brandon/Dropbox/Projects/Active/ColorsApp/flask-boilerplate/venv"
+set -gx VIRTUAL_ENV "/Users/brandon/Dropbox/Projects/Active/Colors/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

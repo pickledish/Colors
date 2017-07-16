@@ -2,3 +2,5 @@ Flask-SQLAlchemy
 coverage
 numpy
 colour
+sklearn
+scipy
