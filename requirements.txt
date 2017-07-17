@@ -3,6 +3,7 @@ click==6.7
 colour==0.1.4
 coverage==4.4.1
 Flask==0.12.2
+Flask-Script==2.0.5
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
