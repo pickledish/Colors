@@ -3,7 +3,6 @@
 #----------------------------------------------------------------------------#
 
 from flask import Flask, render_template, request, make_response
-from flask_sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
 import os, json, csv
@@ -17,14 +16,6 @@ from ColorLogic import Color, Model
 
 app = Flask(__name__)
 app.config.from_object('config')
-#db = SQLAlchemy(app)
-
-# Automatically tear down SQLAlchemy.
-'''
-@app.teardown_request
-def shutdown_session(exception=None):
-	db_session.remove()
-'''
 
 #----------------------------------------------------------------------------#
 # Controllers.
