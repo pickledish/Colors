@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>Brandon Colors</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+	<script src="/static/results.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+		<br><br>
+		<h1 class="header center grey-text text-darken-2">Colors</h1>
+		<div class="row center">
+			<h5 class="header col s12 light">Here are a few color pairings you might like:</h5>
+		</div>
+		<br><br>
+	</div>
+
+	{% for pair in pairs %}
+
+	<div id = "Picture{{ loop.index }}" class="container row pic" hidden>
+
+		<div class="col s6 m3 push-m3">
+			<div id="card1" class="card" style="background-color: {{ pair[0] }}">
+				<div class="card-content">
+					<div id="col1" class="flow-text" style="min-height: 128px">{{ pair[0] }}</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col s6 m3 push-m3">
+			<div id="card2" class="card" style="background-color: {{ pair[1] }}">
+				<div class="card-content">
+					<div id="col2" class="flow-text" style="min-height: 128px">{{ pair[1] }}</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	{% endfor %}
+
+	<div class="container row">
+		<div class="col right-align s6 m3 push-m3">
+			<a id="prev" class="waves-effect grey waves-light btn nav">< Back</a>
+		</div>
+		<div class="col s6 m3 push-m3">
+			<a id="next" class="waves-effect grey waves-light btn nav">Next ></a>
+		</div>
+	</div>
+
+
+</body>
+</html>
+
+
+
+
+
