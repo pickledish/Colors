@@ -8,7 +8,8 @@ from random import randint
 from flask import Flask, Blueprint, render_template, request, make_response
 from ColorLogic import Color, Model
 
-colorApp = Blueprint('colorApp', __name__, template_folder='templates')
+colorApp = Blueprint('colorApp', __name__,
+	template_folder = 'templates', static_folder = 'static')
 
 #----------------------------------------------------------------------------#
 # Basic views -- Displaying choice screen or results, with data
