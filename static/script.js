@@ -14,7 +14,7 @@ $(document).ready(function()
 		var color2 = $("#col2").text();
 		
 		$.ajax({
-			url: '/handleResponse',
+			url: '/colors/handleResponse',
 			type: 'GET',
 			dataType: 'json',
 			data: {color1: color1, color2: color2, response: response},
@@ -39,7 +39,7 @@ $(document).ready(function()
 
 function addResultButton(sessionID) {
 	
-	var href = "/results/" + sessionID
+	var href = "/colors/results/" + sessionID
 	$("#respRow").after('<div class="container row center"><a href=' + href + ' class="waves-effect grey waves-light btn">See Similar</a></div>')
 
 }
