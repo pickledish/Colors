@@ -4,7 +4,7 @@ from flask import Flask
 from ColorApp import colorAppBlueprint
 
 app = Flask(__name__)
-app.register_blueprint(colorAppBlueprint, url_prefix='/')
+app.register_blueprint(colorAppBlueprint, url_prefix='/colors')
 
 manager = Manager(app)
 

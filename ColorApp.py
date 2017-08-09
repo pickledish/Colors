@@ -8,13 +8,18 @@ from random import randint
 from flask import Flask, Blueprint, render_template, request, make_response
 from ColorLogic import Color, Model
 
-colorAppBlueprint = Blueprint('colorApp', __name__, template_folder='templates')
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+colorApp = Blueprint('colorApp', __name__,
+	template_folder = 'templates', static_folder = 'static')
 
 #----------------------------------------------------------------------------#
 # Basic views -- Displaying choice screen or results, with data
 #----------------------------------------------------------------------------#
 
-@colorAppBlueprint.route('/')
+@colorApp.route('/')
 def home():
 
 	sessionID = request.cookies.get('session')
@@ -28,7 +33,7 @@ def home():
 
 	return resp
 
-@colorAppBlueprint.route('results/<sessionID>/')
+@colorApp.route('/results/<sessionID>')
 def results(sessionID):
 
 	model = Model(sessionID)
@@ -42,7 +47,7 @@ def results(sessionID):
 # The big one -- called by AJAX to add a new training color pair
 #----------------------------------------------------------------------------#
 
-@colorAppBlueprint.route('handleResponse/')
+@colorApp.route('/handleResponse')
 def handler():
 
 	returned1 = Color(request.args.get("color1"))
