@@ -1,10 +1,10 @@
 from flask_script import Manager
 from flask import Flask
 
-from ColorApp import colorAppBlueprint
+from ColorApp import colorApp
 
 app = Flask(__name__)
-app.register_blueprint(colorAppBlueprint, url_prefix='/colors')
+app.register_blueprint(colorApp, url_prefix='/colors')
 
 manager = Manager(app)
 
