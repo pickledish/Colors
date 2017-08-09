@@ -75,7 +75,7 @@ def handler():
 		writer.writerow(row)
 		writer.writerow(backwards)
 
-	# Then, just generate two new colors for them to classifyß
+	# Then, just generate two new colors for them to classify
 
 	c = Color.random().hexColor
 	d = Color.random().hexColor
